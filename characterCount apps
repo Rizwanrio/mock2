@@ -1,0 +1,61 @@
+import {Component} from 'react'
+import './App.css'
+
+// Replace your code here
+class App extends Component {
+  state = {
+    input: '',
+    displayList: [],
+  }
+
+  onInput = event => {
+    this.setState({input: event.target.value})
+  }
+
+  onAdd = () => {
+    const {input} = this.state
+    const addTerm = `${input}: ${input.length}`
+    this.setState(prev => ({
+      displayList: [...prev.displayList, addTerm],
+      input: '',
+    }))
+  }
+
+  render() {
+    const {displayList, input} = this.state
+    return (
+      <div className="main">
+        <div className="cont">
+          <div className="left">
+            <h1 className="head">Count the characters like a Boss...</h1>
+            <img
+              src="https://assets.ccbp.in/frontend/react-js/no-user-inputs-img.png"
+              alt="no user inputs"
+            />
+            <ul>
+              {displayList.map(el => (
+                <li key={el}>{el}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="right">
+            <h1 className="cha">Character Counter</h1>
+            <div>
+              <input
+                type="text"
+                onChange={this.onInput}
+                value={input}
+                placeholder="Enter the Character here"
+              />
+              <button type="button" onClick={this.onAdd}>
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+export default App
